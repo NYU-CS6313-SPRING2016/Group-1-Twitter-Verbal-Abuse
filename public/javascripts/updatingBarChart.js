@@ -129,7 +129,7 @@ function barChartUpdate(){
     };
     
     var pullData = function(settings,callback, number){
-        d3.json("/Json/FakeData.json", function (err, data){
+        d3.json("/Json/badwords.json", function (err, data){
             if (err) return console.warn(err);
 
             var newData = data;

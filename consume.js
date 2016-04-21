@@ -2,6 +2,8 @@ var credentials = require('./credentials.js');
 var twitter = require('twitter');
 var sentiment = require('sentiment');
 var mysql = require('mysql');
+var fs = require('fs');
+var path = require('path');
 
 process.on('uncaughtException', function(err) {
   console.log(err);
@@ -11,7 +13,6 @@ var client = mysql.createConnection({
   user: credentials.mysql_username,
   password: credentials.mysql_password,
   database: credentials.mysql_database,
-  port: 8889,
   charset: 'utf8mb4'
 });
 
@@ -25,11 +26,12 @@ var t = new twitter({
 });
 
 
-function parseTwitterDate($stamp) {
+function parseTwitterDate($stamp) {    
   var date = new Date(Date.parse($stamp));
   var output = date.getUTCFullYear() + '-' + ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' + date.getUTCDate() + ' ' + ('00' + date.getUTCHours()).slice(-2) + ':' + ('00' + date.getUTCMinutes()).slice(-2) + ':' + ('00' + date.getUTCSeconds()).slice(-2);
   return output;
 }
+
 
 function parseTweet(tweet) {
 
@@ -46,7 +48,7 @@ function parseTweet(tweet) {
   if (tweet.retweeted_status) {
     retweets = tweet.retweeted_status.retweet_count;
   }
-  sentiment(tweet.text, function (err, result) {
+  sentiment(tweet.text, function (err, result) { 
     // console.log(tweet.text);
     // console.log(result.score);
     var sentiment_score = result.score
@@ -55,26 +57,29 @@ function parseTweet(tweet) {
       'SET tweet_id = ?, tweet_text = ?, created_at = ?, user_id = ?, screen_name = ?, name = ?, profile_image_url = ?, sentiment_score = ?, retweets = ?',
       [tweet_id, tweet_text, created_at, user_id, screen_name, name, profile_image_url, sentiment_score, retweets]
     );
-    console.log("New tweet added!");
   });
 
-  //write into json
-  ModifyJson(function(result){
-    var woca = [];
-    for (var key in config) {
-      woca.push({"key":config[key]["key"],'value':result[key]});
-    }
-    var final = JSON.stringify(woca);
-    fs.writeFileSync('public/Json/FakeData.json', final);
-    console.log("JSON saved to my.json");
-  });
   //  delete old tweets
-  //  client.query( 'DELETE FROM tweet WHERE created_at <  (NOW() + interval 24 hour )' );
+  //client.query( 'DELETE FROM tweet WHERE created_at <  (NOW() + interval 24 hour )' );
+
+  
+  ModifyJson(function(result){
+    var JsonRes = [];
+    //console.log(result);
+    for (var key in config) {
+      JsonRes.push({"key":config[key]["key"], 'value':result[key]});
+    }
+    var final = JSON.stringify(JsonRes);
+    fs.writeFileSync('public/Json/badwords.json', final);
+  });
+
+
+  updateLive(tweet);
+
 
   }
 }
-var fs = require('fs');
-var configFile = fs.readFileSync('public/Json/FakeData.json');
+var configFile = fs.readFileSync('public/Json/badwords.json');
 var config = JSON.parse(configFile);
 
 
@@ -83,21 +88,37 @@ function ModifyJson(callback){
   for (var key in config) {
     var word = config[key]["key"];
     client.query('SELECT COUNT(*) AS aresult FROM `tweet` WHERE `tweet_text` LIKE'+'\'%'+word+'%\'',function(err,rows) {
-        if(err) {throw err;}
-        res.push(rows[0]['aresult']);
+      if(err) {throw err;}
+      res.push(rows[0]['aresult']);
+      //console.log(res);
     });
-  };
+  }
   setTimeout(function() {
-    // 4. Finished async operation,
-    //    call the callback passing the result as argument
+  // 4. Finished async operation,
+  //    call the callback passing the result as argument
+    //while (res.length != config.length) {
+    //}
     callback(res);
-}, Math.random() * 1000);
-
+  }, Math.random() * 1000);
 }
+
+
+function updateLive(data) {
+  var json = JSON.stringify({
+    user : data.user.name,
+    text : data.text
+  });
+  fs.writeFileSync(__dirname + "/public/Json/updateLive.json", json);
+}
+
+
 function getTweets() {
-  t.stream('statuses/filter', {track: 'lame,lardass,nigger,nigga,negro,pussy'}, function(stream) {
+  t.stream('statuses/filter', 
+    {track: "beeyotch,biatch,bitch,chinaman,chinamen,chink,crip,cunt,dago,daygo,dego,dick,douchebag,dyke,fag,fatass,fatso,gash,gimp,golliwog,gook,gyp,homo,hooker,jap,kike,kraut,lame,lardass,lesbo,negro,nigga,nigger,paki,pickaninny,pussy,raghead,retard,shemale,skank,slut,spade,spic,spook,tard,tits,titt,trannies,tranny,twat,wetback,whore,wop"},
+     function(stream) {
 //  t.stream('statuses/sample', function(stream) {
     stream.on('data', function (tweet) {
+      //console.log(tweet.text);
       parseTweet(tweet);
     });
     stream.on('error', function(tweet) {
@@ -112,4 +133,4 @@ function getTweets() {
   });
 }
 
-getTweets();
+exports.getTweets = getTweets;
