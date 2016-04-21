@@ -133,10 +133,6 @@ function barChartUpdate(){
             if (err) return console.warn(err);
 
             var newData = data;
-            data.forEach(function(d,i){
-                var newValue = d.value + Math.floor((Math.random()*10) - 5)
-                newData[i].value = newValue <= 0 ? 10 : newValue
-            })
 
             newData = formatData(newData, number);
 
@@ -158,10 +154,9 @@ function barChartUpdate(){
         //setup (includes first draw)
         var settings = setup(ID, times, height);
         redraw(settings)
-        //Repeat every 3 seconds
+        //Repeat every 1.5 seconds
         setInterval(function(){
             redraw(settings)
-        }, 3000);    
+        }, 1500);    
     }
-    //I like to call it what it does
 }
