@@ -1,0 +1,317 @@
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <style>
+            #Main-body {
+                position:absolute;
+            }
+            .upper {
+                height: 500px;
+                width: 1200px;
+                position: absolute;
+                top: 0px;
+                
+            }
+            .bottom {
+                position: absolute;
+                top: 550px;
+                
+            }
+            .part1 {
+                position: absolute;
+                width: 500px;
+                height: 550px;
+            }
+            .part2 {
+                position: absolute;
+                left: 500px;
+            }
+            .part3 {
+                width: 1200px;
+                position: absolute;
+                top: 0px;
+            }
+            
+            .part3-title {
+                border-bottom: solid;
+                border-top: solid;
+                border-width: thin;
+                border-color:#000;
+                text-align: center;
+                font-weight:bold;
+                
+            }
+            
+            
+            .live-title {
+                border-bottom: solid;
+                border-top: solid;
+                border-width: thin;
+                height: 34px;
+                line-height: 34px;
+                padding: 0 10;
+                font-weight: bold;
+            }
+            .live-title span {
+                float: left;
+                margin-right: 0px;
+            }
+            .live-title span:nth-child(1),
+            .live-list li span:nth-child(1){
+                width: 100px;
+            }
+            .live-title span:nth-child(2),
+            .live-list li p:nth-child(2){
+                width: 1080px;
+                margin-right: 0px;
+            }
+            .live{
+                position:absolute;
+                overflow: hidden;
+                height: 150px;
+                
+            }
+            .live-list{
+                border-bottom: solid;
+                border-width: thin;
+                width:100%;
+                left:0;
+                top:0;
+                color:#000;
+                margin:0;
+                padding:0;
+            }
+            .live-list li {
+                line-height:30px;
+                list-style:none;
+                margin:0;
+                padding:0 10px;
+                display: flex;
+                flex-direction: row;
+            }
+            .live-list li span,
+            .live-list li p {
+                display:inline-block;
+                margin: 0px;
+                overflow:auto;
+                
+            }
+            .live-list li.odd{
+                background: rgba(51,79,109,.3);
+            }
+            .live-list li.even{
+                background: rgba(51,79,109,.1);
+            }
+            
+            
+            #container {
+                width: 700px;
+                height: 500px;
+            }
+            
+            #Abusivewords {
+                text-align: center;
+                vertical-align: middle;
+                position: absolute;
+                width: 250px;
+                height: 300px;
+            }
+            #Targetgroup {
+                text-align: center;
+                vertical-align: middle;
+                position: absolute;
+                left: 250px;
+                width: 250px;
+                height: 300px;
+            }
+            #TopHashtag {
+                position: absolute;
+                top: 300px;
+                width: 250px;
+                height: 250px;
+                text-align: center;
+            }
+            #BadUser {
+                position: absolute;
+                top: 300px;
+                left: 250px;
+                width: 250px;
+                height: 250px;
+                text-align: center;
+            }
+            
+            
+            
+            
+            .bar{
+                fill:#eaeaea;
+            }
+            text.label{
+                fill: #777777;
+                color: #777777;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            text.category{
+                fill: #666666;
+                font-size: 14px;
+            }
+            
+            .barChart {
+                width: 250px;
+                height: 250px;
+                position: absolute;
+                overflow: scroll;
+                padding: 0px;
+                margin: 0px;
+            }
+            .smallbarChart {
+                width: 250px;
+                height: 200px;
+                overflow: scroll;
+                padding: 0px;
+                margin: 0px;
+                position: absolute;
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+        <h1>Twitter Verbal-Abuse</h1>
+        <div id = "Main-body">
+            <div class = "upper">
+                <div class = "part1">
+                    <div class = "panel panel-default" id = "Abusivewords">
+                        <div class = "panel-heading">
+                            Abusive Key Words
+                        </div>
+                        <div class = "panel-body barChart" id = "Abusive-Chart">
+                            
+                        </div>
+                    </div>
+                    <div class = "panel panel-default" id = "Targetgroup">
+                        <div class = "panel-heading">
+                            Target Group
+                        </div>
+                        <div class = "panel-body barChart" id = "Target-Group">
+                        </div>
+                    </div>
+                    <div class = "panel panel-default" id = "TopHashtag">
+                        <div class = "panel-heading">
+                            Top Hashtag
+                        </div>
+                        <div class = "panel-body smallbarChart" id = "top-Hashtag">
+                        </div>
+                    </div>
+                    <div class = "panel panel-default" id = "BadUser">
+                        <div class = "panel-heading">
+                            Bad Users
+                        </div>
+                        <div class = "panel-body smallbarChart" id = "bad-User">
+                        </div>
+                    </div>
+                </div>
+                <div class = "part2">
+                    <div class = "panel panel-default" id = "container">
+                        <ul class = "nav nav-tabs" id = "Tabs">
+                            <li class = "active"> <a href = "#SVG">Tweets</a></li>
+                            <li > <a href = "#SVG">Words</a></li>
+                            <li > <a href = "#SVG">Users</a></li>
+                            <li> <a href = "#SVG">Hashtags</a></li>
+                            <li> <a href = "#SVG">All</a></li>
+                        </ul>
+                        <div class = "tab-content panel-body">
+                            <div class = "tab-pane fade in active" id = "SVG">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "bottom">
+                <div class = "part3" id = "liveStream">
+                    <div class = "part3-title">Live Post</div>
+                    <div class="live-title">
+                        <span>User</span>
+                        <span>Text</span>
+                    </div>
+                    <div class="live">
+                        <ul class="live-list" id = "liveList">
+                            <li class="odd">
+                                <span>item1</span>
+                                <p>asdadw adaascadawdcaca dcacdccac acdacasdc asc adcaaw cwa cawcax adaxd asdsadlasjd asj asjd asjd awljd a jdlaj la jsldaskj as;k jas;jk ;alskj asljkd asldkj c</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+    
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript"  src="/javascripts/updatingBarChart.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            var abusiveWords = new barChartUpdate();
+            abusiveWords.start("#Abusive-Chart", 23, 2, 250);
+            var targetGroup = new barChartUpdate();
+            targetGroup.start("#Target-Group", 5, 1, 250);
+            var topHashtag = new barChartUpdate();
+            topHashtag.start("#top-Hashtag", 5, 1, 200);
+            var badUser = new barChartUpdate();
+            badUser.start("#bad-User", 6, 1, 200);
+            
+            
+            
+            $(".nav-tabs a").click(function() {
+                var page = $("#SVG");
+                page.html($(this).html());
+                $(this).tab('show'); 
+            });
+        }); 
+        function liveStreamUpdate(data) {
+            var color = "odd";
+            
+            var parent = document.getElementById("liveList");
+            var newItem = document.createElement("li");
+            
+            
+            var spanPart1 = document.createElement("span");
+            spanPart1.innerHTML = data.userName;
+            
+            var spanPart2 = document.createElement("p");
+            spanPart3.innerHTML = data.textContent;
+            
+            newItem.appendChild(spanPart1);
+            newItem.appendChild(spanPart2);
+            
+            newItem.className = decideColor();
+            newItem.style.height = "0px";
+            //------------------------//            
+            var $firstElement = $(parent).find('li:first');
+            $(newItem).insertBefore($firstElement);
+            var orginHeight = $firstElement.height();
+            $(newItem).animate({
+                height : orginHeight
+            }, 500, function(){});
+            
+        }
+        function decideColor() {
+            if (color == "even") {
+                color = "odd";
+                return "odd";
+            }
+            else {
+                color = "even";
+                return "even";
+            }
+        }
+    </script>
+</html>
