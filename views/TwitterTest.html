@@ -256,6 +256,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script type="text/javascript"  src="/javascripts/updatingBarChart.js"></script>
+    <script type="text/javascript"  src="/javascripts/updateLive.js"></script>
+
     <script>
         $(document).ready(function() {
             
@@ -268,7 +270,8 @@
             var badUser = new barChartUpdate();
             badUser.start("#bad-User", 6, 1, 200);
             
-            
+            var updateL = new updateLive();
+            updateL.update();
             
             $(".nav-tabs a").click(function() {
                 var page = $("#SVG");
@@ -276,42 +279,6 @@
                 $(this).tab('show'); 
             });
         }); 
-        function liveStreamUpdate(data) {
-            var color = "odd";
-            
-            var parent = document.getElementById("liveList");
-            var newItem = document.createElement("li");
-            
-            
-            var spanPart1 = document.createElement("span");
-            spanPart1.innerHTML = data.userName;
-            
-            var spanPart2 = document.createElement("p");
-            spanPart3.innerHTML = data.textContent;
-            
-            newItem.appendChild(spanPart1);
-            newItem.appendChild(spanPart2);
-            
-            newItem.className = decideColor();
-            newItem.style.height = "0px";
-            //------------------------//            
-            var $firstElement = $(parent).find('li:first');
-            $(newItem).insertBefore($firstElement);
-            var orginHeight = $firstElement.height();
-            $(newItem).animate({
-                height : orginHeight
-            }, 500, function(){});
-            
-        }
-        function decideColor() {
-            if (color == "even") {
-                color = "odd";
-                return "odd";
-            }
-            else {
-                color = "even";
-                return "even";
-            }
-        }
+
     </script>
 </html>
