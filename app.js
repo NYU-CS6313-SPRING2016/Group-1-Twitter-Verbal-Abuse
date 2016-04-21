@@ -1,6 +1,7 @@
 var express = require('express')
     , app = module.exports = express();
-    path = require('path');
+var path = require('path');
+var consume = require('./consume.js');
 
 app.engine('.html', require('ejs').__express);
 
@@ -16,8 +17,8 @@ process.on('uncaughtException', function(err) {
 });
 
 app.get('/', function(req, res){
-  res.render('TwitterTest', {
-  });
+	consume.getTweets();
+  	res.render('TwitterTest', {});
 });
 
 app.listen(3000);
