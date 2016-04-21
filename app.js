@@ -1,3 +1,9 @@
+
+var twitter         = require('twitter'),
+    sentiment       = require('sentiment'),
+    mysql           = require('mysql'),
+    credentials     = require('./credentials.js'),
+
 var express = require('express')
     , app = module.exports = express();
 var path = require('path');
