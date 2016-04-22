@@ -10,6 +10,7 @@ process.on('uncaughtException', function(err) {
 });
 
 var client = mysql.createConnection({
+  host: 'us-cdbr-iron-east-03.cleardb.net',
   user: credentials.mysql_username,
   password: credentials.mysql_password,
   database: credentials.mysql_database,
@@ -17,7 +18,7 @@ var client = mysql.createConnection({
 });
 
 client.connect();
-
+client.qurey('DELETE FROM tweet WHERE 1');
 var t = new twitter({
   consumer_key: credentials.consumer_key,
   consumer_secret: credentials.consumer_secret,
@@ -60,7 +61,7 @@ function parseTweet(tweet) {
   });
 
   //  delete old tweets
-  //client.query( 'DELETE FROM tweet WHERE created_at <  (NOW() + interval 24 hour )' );
+  client.query( 'DELETE FROM tweet WHERE created_at <  (NOW() + interval 24 hour )' );
 
   
   ModifyJson(function(result){

@@ -8,9 +8,10 @@ var credentials = {
     access_token_key: '713092162448138240-kg29Qbae58BrNtFwBjWR2AmidzKWz9K',
     access_token_secret: 'ts3XhUMZY8NruT3S52yQn2t0jED7PBoqNjGaPPEAMfD8E',
 
-	mysql_username: 'root',
-	mysql_password: 'whwhwh',
-	mysql_database: 'twitterTest'
+	mysql_username: 'b685c8f3776ce8',
+	mysql_password: '1f631879',
+	mysql_database: 'heroku_ffae30c1cb89eae'
+	
 
 };
 
