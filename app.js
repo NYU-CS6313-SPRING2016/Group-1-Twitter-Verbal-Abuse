@@ -23,6 +23,7 @@ process.on('uncaughtException', function(err) {
 });
 
 app.get('/', function(req, res){
+	consume.connectSQL();
 	consume.getTweets();
   	res.render('TwitterTest', {});
 });

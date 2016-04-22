@@ -17,8 +17,12 @@ var client = mysql.createConnection({
   charset: 'utf8mb4'
 });
 
-client.connect();
-client.query('DELETE FROM tweet WHERE 1');
+function connectSQL() {
+  client.connect();
+  console.log("Connected");
+  client.query('DELETE FROM tweet WHERE 1');
+}
+
 var t = new twitter({
   consumer_key: credentials.consumer_key,
   consumer_secret: credentials.consumer_secret,
@@ -134,4 +138,5 @@ function getTweets() {
   });
 }
 
+exports.connectSQL = connectSQL;
 exports.getTweets = getTweets;
