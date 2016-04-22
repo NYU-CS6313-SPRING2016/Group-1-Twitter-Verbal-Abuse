@@ -18,7 +18,7 @@ var client = mysql.createConnection({
 });
 
 client.connect();
-client.qurey('DELETE FROM tweet WHERE 1');
+client.query('DELETE FROM tweet WHERE 1');
 var t = new twitter({
   consumer_key: credentials.consumer_key,
   consumer_secret: credentials.consumer_secret,
