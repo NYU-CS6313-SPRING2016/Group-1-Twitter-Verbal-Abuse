@@ -4,6 +4,7 @@ var sentiment = require('sentiment');
 var mysql = require('mysql');
 var fs = require('fs');
 var path = require('path');
+var updateKeyword = require('./keywordUpdate.js')
 
 process.on('uncaughtException', function(err) {
   console.log(err);
@@ -18,9 +19,8 @@ var client = mysql.createConnection({
 });
 
 function connectSQL() {
-  client.connect();
-  console.log("Connected");
-  client.query('DELETE FROM tweet WHERE 1');
+  //client.connect();
+  //client.query('DELETE FROM tweet WHERE 1');
 }
 
 var t = new twitter({
@@ -53,6 +53,8 @@ function parseTweet(tweet) {
   if (tweet.retweeted_status) {
     retweets = tweet.retweeted_status.retweet_count;
   }
+  //----------------------------------------------------------------//
+  /* 
   sentiment(tweet.text, function (err, result) { 
     // console.log(tweet.text);
     // console.log(result.score);
@@ -66,45 +68,13 @@ function parseTweet(tweet) {
 
   //  delete old tweets
   client.query( 'DELETE FROM tweet WHERE created_at <  (NOW() + interval 24 hour )' );
-
-  
-  ModifyJson(function(result){
-    var JsonRes = [];
-    //console.log(result);
-    for (var key in config) {
-      JsonRes.push({"key":config[key]["key"], 'value':result[key]});
-    }
-    var final = JSON.stringify(JsonRes);
-    fs.writeFileSync('public/Json/badwords.json', final);
-  });
-
-
+*/
+//-------------------------------------------------------------//
+  updateKeyword.keywordUpdate(tweet_text);
   updateLive(tweet);
 
 
   }
-}
-var configFile = fs.readFileSync('public/Json/badwords.json');
-var config = JSON.parse(configFile);
-
-
-function ModifyJson(callback){
-  var res=[];
-  for (var key in config) {
-    var word = config[key]["key"];
-    client.query('SELECT COUNT(*) AS aresult FROM `tweet` WHERE `tweet_text` LIKE'+'\'%'+word+'%\'',function(err,rows) {
-      if(err) {throw err;}
-      res.push(rows[0]['aresult']);
-      //console.log(res);
-    });
-  }
-  setTimeout(function() {
-  // 4. Finished async operation,
-  //    call the callback passing the result as argument
-    //while (res.length != config.length) {
-    //}
-    callback(res);
-  }, Math.random() * 1000);
 }
 
 
