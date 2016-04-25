@@ -1,7 +1,11 @@
 {
   "name": "appTest",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.2.5",
+  "description": "Twitter Verbal-Abuse",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
@@ -18,6 +22,10 @@
     "path": "0.4.x",
     "sentiment": "0.2.x",
     "twitter": "^1.2.5"
-
-  }
+  },
+  "keywords": [
+    "node",
+    "twitter",
+    "informationVisualizaion"
+  ]
 }
