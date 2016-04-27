@@ -23,9 +23,15 @@
     "sentiment": "0.2.x",
     "twitter": "^1.2.5"
   },
+    
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/NYU-CS6313-SPRING2016/Group-1-Twitter-Verbal-Abuse"
+  },
   "keywords": [
     "node",
     "twitter",
     "informationVisualizaion"
-  ]
+  ],
+    "license": "NYU"
 }
