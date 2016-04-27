@@ -28,4 +28,4 @@ app.get('/', function(req, res){
   	res.render('TwitterTest', {});
 });
 
-app.listen(4000);
+app.listen(process.env.PORT||4000);
