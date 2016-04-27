@@ -21,7 +21,7 @@ var client = mysql.createConnection({
 function connectSQL() {
   //client.connect();
   //client.query('DELETE FROM tweet WHERE 1');
-  console.log("connect");
+  //console.log("connect");
 }
 
 var t = new twitter({
@@ -98,6 +98,7 @@ function getTweets() {
       parseTweet(tweet);
     });
     stream.on('error', function(tweet) {
+      console.log(tweet);  
       parseTweet(tweet);
     });
     stream.on('end', function(response) {
