@@ -84,7 +84,7 @@ function updateLive(data) {
     user : data.user.name,
     text : data.text
   });
-  fs.writeFileSync(__dirname + "/public/Json/updateLive.json", json);
+  fs.writeFileSync("./public/Json/updateLive.json", json);
 }
 
 
