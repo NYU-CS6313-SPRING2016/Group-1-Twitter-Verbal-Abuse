@@ -39,9 +39,18 @@ function updateLive() {
         }
         this.update = function() {
             setInterval(function() {
-                d3.json("/Json/updateLive.json", function(err, data) {
-                    liveStreamUpdate(data);
-                })
+                $.ajax({
+                    url: '/updateLive',
+                    dataType: 'json',
+                    complete: function(data) {
+                        //jsonData = data.responseText;
+                        if (data.statusText == "OK") {
+                            //console.log(data);
+                            liveStreamUpdate(data.responseJSON);
+                        }
+
+                    }
+                });
             }, 500);
         }
     }

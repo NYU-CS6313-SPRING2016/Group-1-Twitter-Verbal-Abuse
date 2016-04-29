@@ -6,6 +6,10 @@ var fs = require('fs');
 var path = require('path');
 var updateKeyword = require('./keywordUpdate.js')
 
+var jsonLive = {};
+
+
+
 process.on('uncaughtException', function(err) {
   console.log(err);
 });
@@ -21,7 +25,6 @@ var client = mysql.createConnection({
 function connectSQL() {
   //client.connect();
   //client.query('DELETE FROM tweet WHERE 1');
-  //console.log("connect");
 }
 
 var t = new twitter({
@@ -80,11 +83,12 @@ function parseTweet(tweet) {
 
 
 function updateLive(data) {
-  var json = JSON.stringify({
+  //console.log(data.user);
+  jsonLive = JSON.stringify({
     user : data.user.name,
     text : data.text
   });
-  fs.writeFileSync("./public/Json/updateLive.json", json);
+  exports.jsonLive = jsonLive;
 }
 
 
@@ -98,7 +102,6 @@ function getTweets() {
       parseTweet(tweet);
     });
     stream.on('error', function(tweet) {
-      console.log(tweet);  
       parseTweet(tweet);
     });
     stream.on('end', function(response) {

@@ -129,7 +129,7 @@ function barChartUpdate(){
     };
     
     var pullData = function(settings,callback, number){
-        d3.json("/Json/abusiveWords.json", function (err, data){
+        /*d3.json("/Json/abusiveWords.json", function (err, data){
             if (err) return console.warn(err);
 
             var newData = data;
@@ -137,7 +137,23 @@ function barChartUpdate(){
             newData = formatData(newData, number);
 
             callback(settings,newData);
-        })
+        })*/
+
+        $.ajax({
+            url: '/updateKey',
+            dataType: 'json',
+            complete: function(data) {
+                //jsonData = data.responseText;
+                if (data.statusText == "OK") {
+                    var newData = data.responseJSON;
+                    newData = formatData(newData, number);
+                    callback(settings,newData);
+                }
+                
+            }
+        });
+
+
     }    
     //Sort data in descending order and take the top 10 values
     var formatData = function(data, number){

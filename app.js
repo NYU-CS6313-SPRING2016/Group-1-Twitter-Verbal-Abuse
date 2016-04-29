@@ -7,7 +7,11 @@ var twitter         = require('twitter'),
 var express = require('express')
     , app = module.exports = express();
 var path = require('path');
+
 var consume = require('./consume.js');
+var keywords = require('./keywordUpdate.js');
+
+
 
 app.engine('.html', require('ejs').__express);
 
@@ -28,4 +32,14 @@ app.get('/', function(req, res){
   	res.render('TwitterTest', {});
 });
 
-app.listen(process.env.PORT||4000);
+app.get('/updateLive', function(req, res, next) {
+	res.send(consume.jsonLive);
+});
+
+app.get('/updateKey', function(req, res, next) {
+	res.send(keywords.jsonKey);
+});
+
+
+
+app.listen(process.env.PORT || 4000);
