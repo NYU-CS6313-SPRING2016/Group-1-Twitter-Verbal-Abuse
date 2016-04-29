@@ -6,6 +6,10 @@ var fs = require('fs');
 var path = require('path');
 var updateKeyword = require('./keywordUpdate.js')
 
+var jsonLive = {};
+
+
+
 process.on('uncaughtException', function(err) {
   console.log(err);
 });
@@ -79,11 +83,12 @@ function parseTweet(tweet) {
 
 
 function updateLive(data) {
-  var json = JSON.stringify({
+  //console.log(data.user);
+  jsonLive = JSON.stringify({
     user : data.user.name,
     text : data.text
   });
-  fs.writeFileSync(__dirname + "/public/Json/updateLive.json", json);
+  exports.jsonLive = jsonLive;
 }
 
 
