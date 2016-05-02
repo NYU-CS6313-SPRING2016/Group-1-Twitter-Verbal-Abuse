@@ -10,7 +10,7 @@ var path = require('path');
 
 var consume = require('./consume.js');
 var keywords = require('./keywordUpdate.js');
-
+var group = require('./groupUpdate.js');
 
 
 app.engine('.html', require('ejs').__express);
@@ -40,6 +40,8 @@ app.get('/updateKey', function(req, res, next) {
 	res.send(keywords.jsonKey);
 });
 
-
+app.get('/updateGroup', function(req, res, next) {
+	res.send(group.groupJson);
+})
 
 app.listen(process.env.PORT || 4000);
