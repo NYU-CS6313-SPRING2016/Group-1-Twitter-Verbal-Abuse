@@ -6,11 +6,11 @@
 ##Description
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fringilla nec magna sed consequat. Nam condimentum, nisl sed pretium luctus, dui orci tristique nunc, a scelerisque nisi est hendrerit metus. Duis feugiat consectetur odio, in pellentesque neque consequat vel. Pellentesque auctor nec nisi maximus imperdiet. Proin id tristique augue, id bibendum augue. Cras bibendum molestie mi. Nulla a diam in ipsum tincidunt bibendum. Proin condimentum libero non lorem dapibus feugiat.
 
-**Video**: http://link-to-video.com
+**Video**: https://vimeo.com/16739464
 
-**Demo**: http://link-to-demo.com
+**Demo**: https://verbal-abuse-twitter.herokuapp.com/
 
-**Document**: http://link-to-finalreport.com ...
+**Document**: https://docs.google.com/document/d/1y57aaV9IRXpLmCcHHbF7ZWVV1FJ7pTr9ObZZ_OlpLMM/edit?usp=sharing
 
 ##Install instructions
 ###Requirements 
