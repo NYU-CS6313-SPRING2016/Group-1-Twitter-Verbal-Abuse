@@ -1,10 +1,13 @@
 #Visualizing Twitter Verbal Abuse Speech
-![alt text](https://raw.githubusercontent.com/CristianFelix/infoviz/master/Screen.png "Screenshot")
+![alt text](https://raw.githubusercontent.com/yanyatong/yanyatong.github.io/master/screen.png )
+
+![alt text](https://raw.githubusercontent.com/yanyatong/yanyatong.github.io/master/screen2.png )
 
 **Authors**: Heng Wu ([flyingmeat](https://github.com/flyingmeat)), Sutong Feng ([Sutong92](https://github.com/Sutong92)), Yatong Yan ([yanyatong](https://github.com/yanyatong))
 
 ##Description
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fringilla nec magna sed consequat. Nam condimentum, nisl sed pretium luctus, dui orci tristique nunc, a scelerisque nisi est hendrerit metus. Duis feugiat consectetur odio, in pellentesque neque consequat vel. Pellentesque auctor nec nisi maximus imperdiet. Proin id tristique augue, id bibendum augue. Cras bibendum molestie mi. Nulla a diam in ipsum tincidunt bibendum. Proin condimentum libero non lorem dapibus feugiat.
+This visualization tool is mainly to monitor real time streaming data of tweets containing abusive keywords and then analyze them. 
+
 
 **Video**: https://vimeo.com/16739464
 
