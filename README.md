@@ -12,16 +12,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fringilla nec mag
 
 **Document**: http://link-to-finalreport.com ...
 
-##Install instructions (if needed)
+##Install instructions
 ###Requirements 
 The systems has the following dependences:
 
-1. **MongoDB**: to ... 
-2. **Nodejs 6+**: to ...
-3. **Python**: to ...
+1. **elasticsearch**: to https://www.elastic.co/downloads/elasticsearch 
+2. **Nodejs 6+**: to https://nodejs.org/en/
 
-###Runing
-1. Start the database server
-2. On the terminal run `node start.js`
-3. Access `http://localhost:9200`
+###Running
+1. Start the elasticsearch server: cd to elasticsearch's directory and run ./bin/elasticsearch
+2. On the terminal run `node app.js`
+3. Access `http://localhost:4000`
 
