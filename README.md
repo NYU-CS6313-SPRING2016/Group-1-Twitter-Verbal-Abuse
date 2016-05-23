@@ -9,7 +9,7 @@
 This visualization tool is mainly to monitor real time streaming data of tweets containing abusive keywords and then analyze them. By classifying our selected keywords into five categories, users can also view the abusive speech on twitter by group.There are also hashtags, associated words, live tweets content, bar charts of historical data and line charts of historical data. Through our tools we hope users can find some interesting points of twitter verbal abuse.
 
 
-**Video**: https://vimeo.com/16739464
+**Video**: https://vimeo.com/167394641
 
 **Demo**: https://verbal-abuse-twitter.herokuapp.com/
 
